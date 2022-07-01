@@ -13,7 +13,7 @@ The python files implement different functions, such as processing data and draw
 ##### extract_halifax.py:
 Use the dataset Census tracts Cartographic Boundary File which is saved in 'data/map_boundary' folder.<br>
 Data source：https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm <br>
-From this dataset to obtain the data of boundary for the entire Canadian region, from which Halifax data are extracted and save in 'data/whole_halifax/' folder.<br>
+From this dataset to obtain the data of boundary for the entire Canadian region, from which Halifax data are extracted and save in 'data/whole_halifax' folder.<br>
 Draw the map for whole Halifax which is 'image/whole_halifax.png'.<br>
 <br>
 ##### count_accident.py
@@ -23,14 +23,14 @@ From this dataset, positions of accidents happened in Halifax are obtained. Coun
 <br>
 ##### center.py
 Based on the statistics, the area with the highest number of accidents is selected as the central point. Areas near the central point are selected and is saved in 'data/halifax_center' folder. Only this part of area will be addressed next.<br>
-Draw two maps. One is the map of center of Halifax with centroid on each district which is 'image/map_centroid.png'. Another is the map of it with number of accidents annotated on each district which is 'image/map_number'.<br>
+Draw two maps. One is the map of center of Halifax with centroid on each district which is 'image/map_centroid.png'. Another is the map of it with number of accidents annotated on each district which is 'image/map_number.png'.<br>
 <br>
 ##### rate.py
 The average number of accidents per month per district is calculated and stored, covering the original file in 'data/halifax_center' folder.<br>
 <br>
 ##### graph.py
-Each district is treated as a node and neighbouring regions are connected by edges.<br>
-The corresponding map is also drawn.
+Each district is treated as a node and neighbouring regions are connected by edges which is 'image/graph.jpg'. It has index in each node.<br>
+The corresponding map with index is also drawn which is 'image/map_index.png'.
 
 
 
