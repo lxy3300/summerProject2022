@@ -2,8 +2,8 @@
 
 ### data folder
 The data folder contains the original data file and the processed data file.
-<br>
-<br>
+
+
 ### image folder
 The image folder includes drawn maps and graph.
 <br>
@@ -17,7 +17,7 @@ From this dataset to obtain boundary data for the entire Canadian region, from w
 Draw the map for whole Halifax which is 'image/whole_halifax.png'.<br>
 <br>
 ##### count_accident.py
-use the dataset Traffic collison which is saved in 'data' folder.<br>
+use the dataset Traffic collision which is saved in 'data' folder.<br>
 data source: https://catalogue-hrm.opendata.arcgis.com/datasets/e0293fd4721e41d7be4d7386c3c59c16_0/explore?location=44.669039%2C-63.625224%2C12.98 <br>
 From this dataset, positions of accidents happened in Halifax are obtianed. Count the number of accidents happend in each district in Halifax and save date in 'data/accident_number' folder.<br>
 <br>
