@@ -10,7 +10,7 @@ The image folder includes drawn maps and graph.
 <br>
 ### python file
 The python files implement different functions, such as processing data and drawing graphs.<br>
-##### extract_halifax.py:
+##### extract_halifax.py
 Use the dataset Census tracts Cartographic Boundary File which is saved in 'data/map_boundary' folder.<br>
 Data source：https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm <br>
 From this dataset to obtain the data of boundary for the entire Canadian region, from which Halifax data are extracted and save in 'data/whole_halifax' folder.<br>
