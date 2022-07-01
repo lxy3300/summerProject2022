@@ -92,6 +92,9 @@ if __name__ == "__main__":
     # draw the graph
     # graph as the return value for follow up use
     G = draw_graph(center, "image/graph.png")
+    # COO format
+    row = [i for i, _ in G.edges]
+    column = [j for _, j in G.edges]
     # draw the map with index, correspond to the graph
     draw_map(center, "image/map_index.png")
 
