@@ -1,7 +1,9 @@
+import json
 import geopandas as gpd
 import matplotlib.pyplot as plt
 from collections import defaultdict
 import networkx as nx
+from networkx.readwrite import json_graph
 
 
 def read_file(path):
@@ -16,8 +18,10 @@ def add_one_poly(index, poly, edges):
         edges[index].add(vtx[i])
 
 
-def draw_graph(center, fig_path):
+def draw_graph(center, fig_path, rate_type):
+    plt.clf()
     centroid, geometry, node_idx = center['centroid'], center['geometry'], [index for index, _ in center.iterrows()]
+    rate = center[rate_type]
     edges = defaultdict(set)
 
     # the edges for each district
@@ -35,7 +39,7 @@ def draw_graph(center, fig_path):
 
     # each district as a node
     for index, row in center.iterrows():
-        G.add_node(index, pos=(row['centroid'].x, row['centroid'].y))
+        G.add_node(index, pos=(row['centroid'].x, row['centroid'].y), rate=row[rate_type])
     # the position of each node
     pos = nx.get_node_attributes(G, 'pos')
 
@@ -62,21 +66,22 @@ def draw_graph(center, fig_path):
         "width": 2,
     }
     nx.draw(G, pos, **options)
-    # index for each node
-    labels = {i: i for i in node_idx}
-    nx.draw_networkx_labels(G, pos, labels, font_size=6, font_color="whitesmoke")
+
+    labels = dict(zip(node_idx, rate))
+    nx.draw_networkx_labels(G, pos, labels, font_size=4, font_color="whitesmoke")
     plt.savefig(fig_path, dpi=600)
     return G
 
 
-def draw_map(center, fig_path):
+def draw_map(center, fig_path, rate_type):
+    plt.clf()
     center.plot(
         column='ACNUMBER', cmap='Blues',
         linewidth=0.2, edgecolor='0.5')
     for index, row in center.iterrows():
         xy = row['centroid'].coords[:]
         plt.annotate(
-            index, xy=xy[0],
+            row[rate_type], xy=xy[0],
             ha='center', va='center',
             size=3)
     plt.savefig(fig_path, dpi=600)
@@ -89,13 +94,15 @@ if __name__ == "__main__":
     center_proj = center.to_crs('epsg:4087')
     center_proj['centroid'] = center_proj['geometry'].centroid.to_crs('EPSG:4326')
     center = center_proj.to_crs('EPSG:4326')
-    # draw the graph
-    # graph as the return value for follow up use
-    G = draw_graph(center, "image/graph.png")
-    # COO format
-    row = [i for i, _ in G.edges]
-    column = [j for _, j in G.edges]
-    # draw the map with index, correspond to the graph
-    draw_map(center, "image/map_index.png")
-
-
+    # draw the graph based on month rate
+    G_month = draw_graph(center, "image/graph_month.png", 'MRATE')
+    draw_map(center, "image/map_month.png", 'MRATE')   # map corresponding to the graph
+    Gm_json = json_graph.node_link_data(G_month)
+    with open('data/graph_month.json', 'w') as f:
+        json.dump(Gm_json, f)
+    # draw the graph based on month rate
+    G_day = draw_graph(center, "image/graph_day.png", 'DRATE')
+    draw_map(center, "image/map_day.png", 'DRATE') # map corresponding to the graph
+    Gd_json = json_graph.node_link_data(G_day)
+    with open('data/graph_day.json', 'w') as f:
+        json.dump(Gd_json, f)
