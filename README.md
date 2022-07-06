@@ -26,12 +26,14 @@ Based on the statistics, the area with the highest number of accidents is select
 Draw two maps. One is the map of center of Halifax with centroid on each district which is 'image/map_centroid.png'. Another is the map of it with number of accidents annotated on each district which is 'image/map_number.png'.<br>
 <br>
 ##### rate.py
-The average number of accidents per month and per day for each district are both calculated and stored, covering the original file in 'data/halifax_center' folder.<br>
+The average number of accidents per month/day/hour for each district are all calculated and stored.<br>
+The saved file covers the original file in 'data/halifax_center' folder.<br>
 <br>
 ##### graph.py
 Each district is treated as a node and neighbouring regions are connected by edges. Draw the map that each node has rate on it.<br>
 The graph with month rate on it is 'image/graph_month.png'. The corresponding map is 'image/map_month.png'. The json data of this graph save in 'data/graph_month.json'.<br>
-The graph with day rate on it is 'image/graph_day.png'. The corresponding map is 'image/map_day.png'. The json data of this graph save in 'data/graph_day.json'.
+The graph with day rate on it is 'image/graph_day.png'. The corresponding map is 'image/map_day.png'. The json data of this graph save in 'data/graph_day.json'.<br>
+The graph with hour rate on it is 'image/graph_hour.png'. The corresponding map is 'image/map_hour.png'. The json data of this graph save in 'data/graph_hour.json'.
 
 
 
