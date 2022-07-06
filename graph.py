@@ -68,7 +68,11 @@ def draw_graph(center, fig_path, rate_type):
     nx.draw(G, pos, **options)
 
     labels = dict(zip(node_idx, rate))
-    nx.draw_networkx_labels(G, pos, labels, font_size=4, font_color="whitesmoke")
+    if rate_type == 'HRATE':
+        font_size = 3
+    else:
+        font_size = 4
+    nx.draw_networkx_labels(G, pos, labels, font_size=font_size, font_color="whitesmoke")
     plt.savefig(fig_path, dpi=600)
     return G
 
@@ -106,3 +110,9 @@ if __name__ == "__main__":
     Gd_json = json_graph.node_link_data(G_day)
     with open('data/graph_day.json', 'w') as f:
         json.dump(Gd_json, f)
+    # draw the graph based on month rate
+    G_hour = draw_graph(center, "image/graph_hour.png", 'HRATE')
+    draw_map(center, "image/map_hour.png", 'HRATE')  # map corresponding to the graph
+    Gh_json = json_graph.node_link_data(G_hour)
+    with open('data/graph_hour.json', 'w') as f:
+        json.dump(Gh_json, f)
