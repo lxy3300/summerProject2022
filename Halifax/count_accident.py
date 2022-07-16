@@ -3,13 +3,13 @@ import fiona
 
 if __name__ == "__main__":
     # open the halifax district data
-    with fiona.open("data/whole_halifax/whole_halifax.shp") as district_records:    # source file
+    with fiona.open("../Halifax_data/whole_Halifax/whole_Halifax.shp") as district_records:    # source file
         accidents_schema = district_records.schema
         # column for the number of accidents in each district
         accidents_schema["properties"]["ACNUMBER"] = 'int'
 
         with fiona.open(
-                "data/accident_number/accident_number.shp",
+                "../Halifax_data/accident_number/accident_number.shp",
                 "w",
                 crs=district_records.crs,
                 driver=district_records.driver,
@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
                 # open the accident file
                 # loop through each conflict to check if it is in the current district
-                with fiona.open("data/Traffic_Collisions.geojson") as accidents_records:
+                with fiona.open("../Halifax_data/Traffic_Collisions.geojson") as accidents_records:
                     for accident in accidents_records:
                         point = shapely.geometry.shape(accident['geometry'])
                         if shape.contains(point):

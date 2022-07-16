@@ -59,7 +59,7 @@ def draw_graph(center, fig_path, rate_type):
 
     options = {
         "font_size": 36,
-        "node_size": 150,
+        "node_size": 50,
         "edge_color": "#a9dfda",
         "node_color": "#2eae8f",
         "linewidths": 1,
@@ -69,9 +69,9 @@ def draw_graph(center, fig_path, rate_type):
 
     labels = dict(zip(node_idx, rate))
     if rate_type == 'HRATE':
-        font_size = 3
+        font_size = 2
     else:
-        font_size = 4
+        font_size = 3
     nx.draw_networkx_labels(G, pos, labels, font_size=font_size, font_color="whitesmoke")
     plt.savefig(fig_path, dpi=600)
     return G
@@ -92,27 +92,27 @@ def draw_map(center, fig_path, rate_type):
 
 
 if __name__ == "__main__":
-    path_to_center = 'data/halifax_center/halifax_center.shp'
+    path_to_center = '../Toronto_data/Toronto_center/Toronto_center.shp'
     center = read_file(path_to_center)
     # change crs to calculate centroid for each district
     center_proj = center.to_crs('epsg:4087')
     center_proj['centroid'] = center_proj['geometry'].centroid.to_crs('EPSG:4326')
     center = center_proj.to_crs('EPSG:4326')
     # draw the graph based on month rate
-    G_month = draw_graph(center, "image/graph_month.png", 'MRATE')
-    draw_map(center, "image/map_month.png", 'MRATE')   # map corresponding to the graph
+    G_month = draw_graph(center, "../Toronto_image/graph_month.png", 'MRATE')
+    draw_map(center, "../Toronto_image/map_month.png", 'MRATE')   # map corresponding to the graph
     Gm_json = json_graph.node_link_data(G_month)
-    with open('data/graph_month.json', 'w') as f:
+    with open('../Toronto_data/graph_month.json', 'w') as f:
         json.dump(Gm_json, f)
     # draw the graph based on month rate
-    G_day = draw_graph(center, "image/graph_day.png", 'DRATE')
-    draw_map(center, "image/map_day.png", 'DRATE') # map corresponding to the graph
+    G_day = draw_graph(center, "../Toronto_image/graph_day.png", 'DRATE')
+    draw_map(center, "../Toronto_image/map_day.png", 'DRATE') # map corresponding to the graph
     Gd_json = json_graph.node_link_data(G_day)
-    with open('data/graph_day.json', 'w') as f:
+    with open('../Toronto_data/graph_day.json', 'w') as f:
         json.dump(Gd_json, f)
     # draw the graph based on month rate
-    G_hour = draw_graph(center, "image/graph_hour.png", 'HRATE')
-    draw_map(center, "image/map_hour.png", 'HRATE')  # map corresponding to the graph
+    G_hour = draw_graph(center, "../Toronto_image/graph_hour.png", 'HRATE')
+    draw_map(center, "../Toronto_image/map_hour.png", 'HRATE')  # map corresponding to the graph
     Gh_json = json_graph.node_link_data(G_hour)
-    with open('data/graph_hour.json', 'w') as f:
+    with open('../Toronto_data/graph_hour.json', 'w') as f:
         json.dump(Gh_json, f)

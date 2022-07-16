@@ -17,8 +17,8 @@ def rate_month(dataframe, months):
 
 
 def calculate_days():
-    d1 = datetime.datetime(2018, 1, 1)
-    d2 = datetime.datetime(2022, 5, 1)
+    d1 = datetime.datetime(2014, 1, 1)
+    d2 = datetime.datetime(2022, 1, 1)
     intervals = d2 - d1
     return intervals.days
 
@@ -34,10 +34,10 @@ def rate_hour(dataframe, hours):
 
 
 if __name__ == "__main__":
-    path_to_center = 'data/halifax_center/halifax_center.shp'
+    path_to_center = '../Toronto_data/Toronto_center/Toronto_center.shp'
     center = read_file(path_to_center)
     # calculate month rate
-    center = rate_month(center, 52)
+    center = rate_month(center, 96)
     # calculate day rate
     days = calculate_days()
     center = rate_day(center, days)
