@@ -28,4 +28,5 @@ if __name__ == "__main__":
                 number = len(accidents_list)
                 points = [x for x in points if not shape.contains(x)]
                 district['properties']['ACNUMBER'] = number
-                dst.write(district)
+                if number != 0:
+                    dst.write(district)
